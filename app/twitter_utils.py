@@ -2,7 +2,7 @@ import tweepy
 from app.mock_data import mock_tweets
 
 def get_api():
-    # Replace with your API keys
+   
     API_KEY = ""
     API_SECRET = ""
     ACCESS_TOKEN = ""
