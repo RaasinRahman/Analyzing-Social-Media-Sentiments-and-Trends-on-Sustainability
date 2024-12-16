@@ -62,6 +62,10 @@ A virtual environment containing all the dependencies.
    ```bash
    cd (to the frontend)
    ```
+5. On another terminal run:
+   ```bash
+   python run.py
+   ```
 6. Run the application:
    ```bash
    npm run dev
