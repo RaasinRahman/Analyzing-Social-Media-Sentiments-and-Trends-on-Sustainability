@@ -5,6 +5,7 @@ def create_app():
     app = Flask(__name__)
     app.config.from_object("app.config.Config")
 
+    # Enable CORS globally
     CORS(app, resources={r"/*": {"origins": "http://localhost:5173"}}, supports_credentials=True)
 
     # Register routes
