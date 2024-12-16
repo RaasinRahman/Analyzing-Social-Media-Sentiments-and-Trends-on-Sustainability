@@ -2,7 +2,7 @@ import tweepy
 from app.mock_data import mock_tweets
 
 def get_api():
-    # Replace with your API keys
+   
     API_KEY = ""
     API_SECRET = ""
     ACCESS_TOKEN = ""
@@ -26,5 +26,4 @@ def fetch_tweets(hashtags, count=10):
         # Match normalized hashtags with hashtags in the tweet
         if any(tag in tweet_hashtags for tag in normalized_hashtags):
             filtered_tweets.append(tweet)
-
-    return filtered_tweets[:count]
+    return filtered_tweets[:count]  # Limit to 'count' tweets
