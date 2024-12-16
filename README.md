@@ -82,16 +82,10 @@ A virtual environment containing all the dependencies.
 
 ---
 
-### Contribution Guidelines
-Contributions are welcome! Please follow these steps:
-1. Fork the repository.
-2. Create a new branch for your feature/bugfix.
-3. Submit a pull request with a clear description of your changes.
 
 ---
 
-### License
-This project is licensed under the MIT License. See the `LICENSE` file for details.
+
 
 ---
 
