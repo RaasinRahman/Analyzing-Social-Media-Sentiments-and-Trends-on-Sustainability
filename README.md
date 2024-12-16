@@ -58,9 +58,13 @@ A virtual environment containing all the dependencies.
    ```bash
    pip install -r requirements.txt
    ```
-4. Run the application:
+4. Inside the powershell/terminal:
    ```bash
-   python run.py
+   cd (to the frontend)
+   ```
+6. Run the application:
+   ```bash
+   npm run dev
    ```
 
 ---
