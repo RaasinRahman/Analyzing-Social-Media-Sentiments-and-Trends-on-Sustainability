@@ -80,12 +80,6 @@ A virtual environment containing all the dependencies.
 2. Enhanced machine learning models for better sentiment accuracy.
 3. Deployment to cloud for scalability.
 
----
-
-
----
-
-
 
 ---
 
