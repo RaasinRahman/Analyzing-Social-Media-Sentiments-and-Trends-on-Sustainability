@@ -1,18 +1,32 @@
-from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
+# backend/app/sentiment_utils.py
 
-# Function to analyze the sentiment of a list of tweets
+import pandas as pd
+from nltk.sentiment import SentimentIntensityAnalyzer
+import nltk
+
+nltk.download('vader_lexicon')
+sia = SentimentIntensityAnalyzer()
+
 def analyze_sentiments(tweets):
-    analyzer = SentimentIntensityAnalyzer()
-    results = []
+    df = pd.DataFrame({'tweet': tweets})
+    
+    # Analyze Sentiment
+    def analyze_sentiment(tweet):
+        scores = sia.polarity_scores(tweet)
+        return scores['compound'], scores['pos'], scores['neu'], scores['neg']
 
-    for tweet in tweets:
-        text = tweet.get("text", "")
-        score = analyzer.polarity_scores(text)
-        results.append({
-            "text": text,
-            "sentiment": score,
-            "created_at": tweet.get("created_at", "N/A"),  # Default to "N/A" if not provided
-            "user": tweet.get("user", "Anonymous"),       # Default to "Anonymous" if not provided
-        })
+    df[['compound', 'positive', 'neutral', 'negative']] = df['tweet'].apply(
+        lambda x: pd.Series(analyze_sentiment(x))
+    )
 
-    return results
+    # Classify Sentiments
+    def classify_sentiment(compound):
+        if compound > 0.05:
+            return 'Positive'
+        elif compound < -0.05:
+            return 'Negative'
+        else:
+            return 'Neutral'
+
+    df['sentiment'] = df['compound'].apply(classify_sentiment)
+    return df.to_dict(orient='records')

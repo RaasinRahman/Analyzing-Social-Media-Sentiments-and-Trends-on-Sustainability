@@ -1,17 +1,23 @@
 import React, { useState } from "react";
 
-const FetchTweets = () => {
+const FetchTweets = ({ onFetch }) => {
   const [hashtags, setHashtags] = useState("");
-  const [tweets, setTweets] = useState([]);
 
   const fetchTweets = async () => {
-    const response = await fetch(`${import.meta.env.VITE_API_URL}/fetch_tweets`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ hashtags: hashtags.split(",") }),
-    });
-    const data = await response.json();
-    setTweets(data);
+    try {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/fetch_tweets`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ hashtags: hashtags.split(",") }),
+      });
+
+      const data = await response.json();
+      console.log("Fetched Tweets:", data);
+
+      onFetch(data, hashtags.split(",")); // Send fetched data and hashtags to App
+    } catch (error) {
+      console.error("Error fetching tweets:", error);
+    }
   };
 
   return (
@@ -24,11 +30,6 @@ const FetchTweets = () => {
         placeholder="Enter hashtags (comma-separated)"
       />
       <button onClick={fetchTweets}>Fetch</button>
-      <ul>
-        {tweets.map((tweet, index) => (
-          <li key={index}>{tweet.text}</li>
-        ))}
-      </ul>
     </div>
   );
 };
